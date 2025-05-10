@@ -1,0 +1,21 @@
+Layer.py
+
+-Created an Abstract Base class as 'Layer' which serves as a blue print for the layers in the neural network
+-Using ABC as a way to enforce that any subclass must implement the below methods:
+    - @property output: represents the output of the layer. Subclass (Dense) will define how it is computed.
+    - __call__ method: for forward pass. specifically using __call__ to encapuslate the forward pass logic by the subclass(Dense) simimlar to common deep learning frameworks. 
+    - build method: to initialize the model's parameters i.e. weights, biases.
+    - update: to update the model's parameters using optimizers.
+
+- Created a Dense class, which creates a fully connected layer, further building the necessary logic for each method inherited from the parent clas (Layer).
+
+The reason for choosing this type of design is to easily add new type of layers such as Conv layers, dropout layers by subclassing the parent class (Layer).
+The forward pass, where input data flows and updates through the Dense layer, computes the output using weights and biases.
+Backward pass, also known as back propagation, in which gradients dw and db are computed. 
+Update method, adjusts the weights and biases using an optimizer. 
+
+
+Why getter and setter methods for weight, biases and their gradients?
+To avoid ValueError: To not expose the attributes and ensure only valid values, in our case a NumPy array can be assigned instead of other datatypes such as strings. Also can be re-phrased as gaining control over them and protects code from external modification.
+
+
