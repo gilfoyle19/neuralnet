@@ -18,4 +18,20 @@ Update method, adjusts the weights and biases using an optimizer.
 Why getter and setter methods for weight, biases and their gradients?
 To avoid ValueError: To not expose the attributes and ensure only valid values, in our case a NumPy array can be assigned instead of other datatypes such as strings. Also can be re-phrased as gaining control over them and protects code from external modification.
 
+Activation.py
 
+-Created an Abstract Base class as 'Activation' which serves as a blueprint for activation functions in a neural network.
+-The purpose of the Activation class is to define a standard interface for activation functions, ensuring that all subclasses implement the required methods.
+
+-Using ABC as a way to enforce that any subclass must implement the below methods:
+    - __call__ method: This method applies the activation function to the input tensor. Subclasses (e.g., Sigmoid, ReLU) define the specific activation logic.
+    - gradient method: (Implemented in subclasses) Computes the derivative of the activation function, which is essential for backpropagation.
+
+- Created specific activation function classes such as Sigmoid and ReLU, which inherit from the Activation class:
+    - Sigmoid: Implements the sigmoid activation function, which maps input values to a range between 0 and 1. Also provides the gradient of the sigmoid function.
+    - ReLU: Implements the ReLU (Rectified Linear Unit) activation function, which outputs the input if it is positive and 0 otherwise.
+
+The reason for choosing this type of design is to ensure flexibility and extensibility. New activation functions can be added easily by subclassing the Activation class and implementing the required methods.
+
+- The __call__ method in each activation function allows the activation function to be applied directly to input tensors, making the code more intuitive and Pythonic.
+- The gradient method ensures that the derivative of the activation function is available for backpropagation during training.
