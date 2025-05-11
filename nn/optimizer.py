@@ -33,3 +33,17 @@ class Optimizer:
             Update the bias of the layer using the optimizer.
             """
             layer.bias -= self._learning_rate * grad_bias
+
+class SGD(Optimizer):
+    """Stochastic Gradient Descent optimizer."""
+    def __init__(self, learning_rate: float):
+        """
+        Initialize the SGD optimizer with a learning rate.
+        """
+        super().__init__(learning_rate)
+    
+    def update_weights(self, layer, grad_weights):
+        layer.weights -= self._learning_rate * grad_weights
+    
+    def update_bias(self, layer, grad_bias):
+        layer.bias -= self._learning_rate * grad_bias
