@@ -10,7 +10,7 @@ class Callback(ABC):
         if os.path.isfile(file_path) and not overwrite:
             raise ValueError(f"File {file_path} already exists. Set overwrite=True to overwrite.")
         else:
-            # Create the file and write the header
+            # Create the file and write the header.
             with open(file_path, 'w') as f:
                 f.write("epoch,loss\n")
         
@@ -19,4 +19,4 @@ class Callback(ABC):
             Called at the end of each epoch.
             """
             with open(self._file_path, 'a') as f:
-                f.write(f"{epoch},{loss}\n") #write the epoch and loss to the file
+                f.write(f"{epoch},{loss}\n") #write the epoch and loss to the file.
