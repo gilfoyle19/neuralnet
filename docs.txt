@@ -35,3 +35,38 @@ The reason for choosing this type of design is to ensure flexibility and extensi
 
 - The __call__ method in each activation function allows the activation function to be applied directly to input tensors, making the code more intuitive and Pythonic.
 - The gradient method ensures that the derivative of the activation function is available for backpropagation during training.
+
+
+Loss.py
+
+-Created an Abstract Base class as 'Loss' which serves as a blueprint for loss functions in a neural network.
+-The purpose of the Loss class is to define a standard interface for loss functions, ensuring that all subclasses implement the required methods.
+
+-Using ABC as a way to enforce that any subclass must implement the below methods:
+    - __call__ method: This method computes the loss value given the predicted and actual values. Subclasses (e.g., MeanSquaredError, CrossEntropyLoss) define the specific loss computation logic.
+    - gradient method: (Implemented in subclasses) Computes the gradient of the loss function with respect to the predictions, which is essential for backpropagation.
+
+- Created specific loss function classes such as MeanSquaredError and CrossEntropyLoss, which inherit from the Loss class:
+    - MeanSquaredError: Implements the mean squared error loss function, which calculates the average squared difference between predicted and actual values.
+    - CrossEntropyLoss: Implements the cross-entropy loss function, which is commonly used for classification tasks.
+
+The reason for choosing this type of design is to ensure flexibility and extensibility. New loss functions can be added easily by subclassing the Loss class and implementing the required methods.
+
+- The __call__ method in each loss function allows the loss to be computed directly by passing the predicted and actual values, making the code more intuitive and Pythonic.
+- The gradient method ensures that the derivative of the loss function is available for backpropagation during training.
+
+Callback.py
+
+-Created an Abstract Base class as 'Callback' which serves as a blueprint for callback functions in a neural network.
+-The purpose of the Callback class is to define a standard interface for callback functions, ensuring that all subclasses implement the required methods.
+
+-Using ABC as a way to enforce that any subclass must implement the below methods:
+    - on_epoch_end method: This method is called at the end of each training epoch. Subclasses (e.g., CSVLogger) define the specific logic to be executed at the end of an epoch.
+
+- Created specific callback classes such as CSVLogger, which inherit from the Callback class:
+    - CSVLogger: Logs the epoch number and loss value to a CSV file. It ensures that training progress is recorded in a structured format for later analysis.
+
+The reason for choosing this type of design is to ensure flexibility and extensibility. New callback functions can be added easily by subclassing the Callback class and implementing the required methods.
+
+- The on_epoch_end method in each callback function allows custom logic to be executed at the end of each epoch, making the training process more modular and customizable.
+- The CSVLogger class provides a simple and effective way to log training progress, ensuring that the data is saved in a format that can be easily analyzed.
