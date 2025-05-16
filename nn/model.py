@@ -90,16 +90,19 @@ class NeuralNet(Model):
                 prev_layer, prev_activation = self._layers[index - 1]
                 prev_layer_output = prev_activation(prev_layer.output)
 
+            # dz shape: (num_samples, output_dim)
+            # prev_layer_output shape: (num_samples, input_dim)
             dz = np.multiply(da, activation.gradient(layer.output))
+
+            # grad_weights shape: (input_dim, output_dim)
             layer.grad_weights = (
-                np.dot(dz, np.transpose(prev_layer_output)) / self._num_examples
+                np.dot(prev_layer_output.T, dz) / self._num_examples
             )
-            layer.grad_weights = (
-                layer.grad_weights
-                + (self._regularization_factor / self._num_examples) * layer.weights
-            )
-            layer.grad_bias = np.mean(dz, axis=1, keepdims=True)
-            da = np.dot(np.transpose(layer.weights), dz)
+            layer.grad_weights += (self._regularization_factor / self._num_examples) * layer.weights
+            layer.dw = layer.grad_weights 
+
+            layer.grad_bias = np.mean(dz, axis=0, keepdims=True)
+            layer.db = layer.grad_bias    
 
     def fit(
         self,
