@@ -10,8 +10,8 @@ A simple, educational neural network library built with NumPy. This library allo
 - **Activation functions**: ReLU, Sigmoid, Linear, etc.
 - **Loss functions**: Mean Squared Error, Binary Crossentropy, etc.
 - **Optimizers**: SGD, Adam, and more
-- **Callback support** for logging training progress (e.g., CSVLogger)
-- **Easy-to-use API** for building and training models
+- **Callback** for logging training progress (e.g., CSVLogger)
+
 
 ---
 
